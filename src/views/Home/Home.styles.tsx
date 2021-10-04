@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-  background-color: #eeeeee;
   display: flex;
   height: 100%;
   left: 0;
@@ -11,14 +10,13 @@ export const Wrapper = styled.div`
 `;
 
 export const ContentLeft = styled.div`
-  background-color: #dddddd;
+  border-right: 1px solid ${({ theme }) => theme.colors.neutral.color300};
   flex-shrink: 0;
   max-width: 300px;
   width: 30%;
 `;
 
 export const ContentRight = styled.div`
-  background-color: #cccccc;
   display: flex;
   flex-grow: 1;
 `;
