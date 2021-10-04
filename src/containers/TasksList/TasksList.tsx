@@ -5,21 +5,28 @@ import { Wrapper } from './TasksList.styles';
 type Props = {
   isLoading: boolean;
   selectedId?: string;
-  tasks?: Array<Task>;
+  tasks: Array<Task>;
 };
 
-const TasksList = ({ isLoading = false, selectedId, tasks }: Props) => {
+const TasksList = ({ isLoading = false, selectedId, tasks = [] }: Props) => {
   let content = <p>Loading...</p>;
 
   if (!isLoading) {
-    if (tasks?.length === 0) {
+    if (tasks.length === 0) {
       content = <p>No tasks</p>;
     } else {
+      const sortedTasks = [...tasks];
+      console.log(tasks);
+      sortedTasks.sort((x, y) => {
+        return x.done === y.done ? 0 : x.done ? 1 : -1;
+      });
+
       content = (
         <ul>
-          {tasks?.map(({ id, title }) => {
+          {sortedTasks.map(({ done, id, title }) => {
             return (
               <li key={id}>
+                <input checked={done} type={'checkbox'} />
                 <Link
                   style={{
                     backgroundColor: selectedId === id ? 'pink' : 'white',

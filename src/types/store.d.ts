@@ -1,6 +1,7 @@
 import React, { ReactNode } from 'react';
 
 export type Task = {
+  done: boolean;
   id: string;
   notes?: string;
   subTasks?: Array<Task>;

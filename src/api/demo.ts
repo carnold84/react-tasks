@@ -12,12 +12,14 @@ const getState = async () => {
     : {
         tasks: [
           {
+            done: true,
             id: '1',
             notes:
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec ornare urna. Phasellus viverra pulvinar tortor. Fusce ornare euismod augue in scelerisque. Curabitur dolor augue, feugiat ac pellentesque id, venenatis non dui. Duis aliquet quis neque ut vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
             title: 'Task 1',
           },
           {
+            done: false,
             id: '2',
             notes:
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec ornare urna. Phasellus viverra pulvinar tortor. Fusce ornare euismod augue in scelerisque. Curabitur dolor augue, feugiat ac pellentesque id, venenatis non dui. Duis aliquet quis neque ut vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
@@ -38,6 +40,7 @@ const getState = async () => {
             title: 'Task 2',
           },
           {
+            done: false,
             id: '3',
             title: 'Task 3',
           },
