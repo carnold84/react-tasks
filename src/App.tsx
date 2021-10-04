@@ -11,7 +11,10 @@ const App = () => {
         themes={[defaultTheme, darkTheme]}>
         <Router>
           <Switch>
-            <Route path="/">
+            <Route exact={true} path="/">
+              <Home />
+            </Route>
+            <Route path="/:id">
               <Home />
             </Route>
           </Switch>

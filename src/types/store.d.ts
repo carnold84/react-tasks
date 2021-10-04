@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 
 export type Task = {
   id: string;
+  notes?: string;
   subTasks?: Array<Task>;
   title: string;
 };
