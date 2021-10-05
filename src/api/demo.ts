@@ -4,6 +4,11 @@ type TasksResponse = {
   tasks: Array<Task>;
 };
 
+type CreateTaskResponse = {
+  error?: string;
+  task: Task;
+};
+
 const getState = async () => {
   const response = await localStorage.getItem('react_tasks');
 
@@ -11,7 +16,7 @@ const getState = async () => {
     ? JSON.parse(response)
     : {
         tasks: [
-          {
+          /* {
             done: true,
             id: '1',
             notes:
@@ -43,12 +48,34 @@ const getState = async () => {
             done: false,
             id: '3',
             title: 'Task 3',
-          },
+          }, */
         ],
       };
 };
 
+const saveState = async (state: TasksResponse) => {
+  await localStorage.setItem('react_tasks', JSON.stringify(state));
+};
+
 const api = {
+  async createTask(task: Task) {
+    return new Promise<CreateTaskResponse>(async (resolve, reject) => {
+      const state = await getState();
+      const nextState = {
+        ...state,
+        tasks: [task, ...state.tasks],
+      };
+
+      await saveState(nextState);
+
+      setTimeout(() => {
+        resolve({
+          task,
+          error: undefined,
+        });
+      }, 1000);
+    });
+  },
   async fetchTasks() {
     return new Promise<TasksResponse>(async (resolve, reject) => {
       const state = await getState();

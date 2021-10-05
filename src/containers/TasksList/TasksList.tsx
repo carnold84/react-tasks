@@ -16,7 +16,6 @@ const TasksList = ({ isLoading = false, selectedId, tasks = [] }: Props) => {
       content = <p>No tasks</p>;
     } else {
       const sortedTasks = [...tasks];
-      console.log(tasks);
       sortedTasks.sort((x, y) => {
         return x.done === y.done ? 0 : x.done ? 1 : -1;
       });
@@ -26,7 +25,11 @@ const TasksList = ({ isLoading = false, selectedId, tasks = [] }: Props) => {
           {sortedTasks.map(({ done, id, title }) => {
             return (
               <li key={id}>
-                <input checked={done} type={'checkbox'} />
+                <input
+                  checked={done}
+                  onChange={() => console.log('change')}
+                  type={'checkbox'}
+                />
                 <Link
                   style={{
                     backgroundColor: selectedId === id ? 'pink' : 'white',

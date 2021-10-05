@@ -8,6 +8,10 @@ export type Task = {
   title: string;
 };
 
+export type NewTask = {
+  title: string;
+};
+
 export type State = {
   tasks: Array<Task>;
 };
