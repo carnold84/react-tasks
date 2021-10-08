@@ -1,3 +1,5 @@
+import { ChangeEvent, useState } from 'react';
+import { Typography, CaretDown } from 'react-library';
 import { Task as TaskType } from '../../types/store';
 import { Wrapper } from './Task.styles';
 
@@ -7,18 +9,41 @@ type Props = {
 };
 
 const Task = ({ isSaving = false, task }: Props) => {
+  const [values, setValues] = useState({ ...task });
+
+  console.log(CaretDown);
+
+  const onTitleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setValues({
+      ...values,
+      title: evt.target.value,
+    });
+  };
+
+  const onNotesChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    setValues({
+      ...values,
+      notes: evt.target.value,
+    });
+  };
+
   return (
     <Wrapper>
+      <CaretDown />
       {isSaving && 'Saving...'}
       {!isSaving && 'Saved'}
-      <input
-        onChange={() => console.log('change')}
+      <Typography
+        component={'input'}
+        variant={'h3'}
+        onChange={onTitleChange}
         type={'text'}
-        value={task?.title ?? 'New Task'}
+        value={values?.title ?? 'New Task'}
       />
-      <textarea
-        onChange={() => console.log('change')}
-        value={task?.notes ?? ''}
+      <Typography
+        component={'textarea'}
+        variant={'p'}
+        onChange={onNotesChange}
+        value={values?.notes ?? ''}
       />
       {task?.subTasks && (
         <ul>

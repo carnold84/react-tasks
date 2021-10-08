@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Typography } from 'react-library';
 import TasksList from '../../containers/TasksList';
 import useAddTask from '../../hooks/useAddTask';
 import useTasks from '../../hooks/useTasks';
@@ -65,7 +65,9 @@ const Home = () => {
   return (
     <Wrapper>
       <ContentLeft>
-        <h1>Tasks</h1>
+        <Typography as={'h1'} variant={'h1'}>
+          Tasks
+        </Typography>
         {leftContent}
         <button onClick={onNewTask}>New Task</button>
       </ContentLeft>
