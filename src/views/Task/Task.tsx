@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
-import { Typography, CaretDown } from 'react-library';
+import { Progress, Typography } from 'react-library';
+import TextField from '../../containers/TextField';
 import { Task as TaskType } from '../../types/store';
 import { Wrapper } from './Task.styles';
 
@@ -10,8 +11,6 @@ type Props = {
 
 const Task = ({ isSaving = false, task }: Props) => {
   const [values, setValues] = useState({ ...task });
-
-  console.log(CaretDown);
 
   const onTitleChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setValues({
@@ -29,22 +28,15 @@ const Task = ({ isSaving = false, task }: Props) => {
 
   return (
     <Wrapper>
-      <CaretDown />
-      {isSaving && 'Saving...'}
+      {isSaving && <Progress />}
       {!isSaving && 'Saved'}
-      <Typography
-        component={'input'}
-        variant={'h3'}
-        onChange={onTitleChange}
-        type={'text'}
-        value={values?.title ?? 'New Task'}
-      />
-      <Typography
-        component={'textarea'}
-        variant={'p'}
+      <TextField mb={4} onChange={onTitleChange} value={values?.title ?? ''} />
+      <TextField
         onChange={onNotesChange}
+        type={'textarea'}
         value={values?.notes ?? ''}
       />
+
       {task?.subTasks && (
         <ul>
           {task.subTasks.map(({ id, title }) => {

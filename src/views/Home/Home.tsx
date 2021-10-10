@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Typography } from 'react-library';
+import { Button, LoadingScreen, Typography } from 'react-library';
 import TasksList from '../../containers/TasksList';
 import useAddTask from '../../hooks/useAddTask';
 import useTasks from '../../hooks/useTasks';
@@ -14,7 +14,6 @@ const Home = () => {
   const { data: tasks, isLoading } = useTasks();
   const { addTask, isSaving } = useAddTask();
   const history = useHistory();
-  console.log(isSaving);
 
   const onNewTask = () => {
     const task = addTask({
@@ -39,7 +38,7 @@ const Home = () => {
   let rightContent;
 
   if (isLoading) {
-    rightContent = 'Loading...';
+    rightContent = <LoadingScreen />;
   } else {
     if (tasks.length === 0) {
       rightContent = <button onClick={onNewTask}>Add a task</button>;
@@ -65,11 +64,13 @@ const Home = () => {
   return (
     <Wrapper>
       <ContentLeft>
-        <Typography as={'h1'} variant={'h1'}>
+        <Typography component={'h1'} mx={3} my={2} variant={'h2'}>
           Tasks
         </Typography>
         {leftContent}
-        <button onClick={onNewTask}>New Task</button>
+        <Button isPrimary={true} m={3} onClick={onNewTask}>
+          New Task
+        </Button>
       </ContentLeft>
       <ContentRight>{rightContent}</ContentRight>
     </Wrapper>

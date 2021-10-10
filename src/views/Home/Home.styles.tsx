@@ -11,6 +11,8 @@ export const Wrapper = styled.div`
 
 export const ContentLeft = styled.div`
   border-right: 1px solid ${({ theme }) => theme.colors.neutral.color300};
+  display: flex;
+  flex-direction: column;
   flex-shrink: 0;
   max-width: 300px;
   width: 30%;
@@ -18,5 +20,8 @@ export const ContentLeft = styled.div`
 
 export const ContentRight = styled.div`
   display: flex;
+  flex-direction: column;
   flex-grow: 1;
+  position: relative;
+  width: 100%;
 `;

@@ -10,6 +10,9 @@
     "@types/node": "^16.10.2",
     "@types/react": "^17.0.26",
     "@types/react-dom": "^17.0.9",
+    "@types/react-router-dom": "^5.3.0",
+    "@types/styled-components": "^5.1.14",
+    "@types/uuid": "^8.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-library": "file:../react-library/react-library-1.0.0.tgz",
@@ -43,10 +46,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "@types/react-router-dom": "^5.3.0",
-    "@types/styled-components": "^5.1.14",
-    "@types/uuid": "^8.3.1"
   }
 }
