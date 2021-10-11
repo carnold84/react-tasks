@@ -1,13 +1,7 @@
-import { Link } from 'react-router-dom';
-import {
-  Checkbox,
-  List,
-  ListItem,
-  ListItemText,
-  LoadingScreen,
-} from 'react-library';
+import { List, LoadingScreen } from 'react-library';
 import { Task } from '../../types/store';
 import { Wrapper } from './TasksList.styles';
+import TaskItem from '../TaskItem';
 
 type Props = {
   isLoading: boolean;
@@ -40,22 +34,13 @@ const TasksList = ({ isLoading = false, selectedId, tasks = [] }: Props) => {
 
       content = (
         <List width={'100%'}>
-          {sortedTasks.map(({ done, id, title }) => {
+          {sortedTasks.map((task) => {
             return (
-              <ListItem
-                contentLeft={
-                  <Checkbox
-                    id={`check-${id}`}
-                    mr={2}
-                    onChange={() => onCheck({ id, value: !done })}
-                    value={done}
-                  />
-                }
-                key={id}>
-                <ListItemText component={Link} to={`/${id}`}>
-                  {title}
-                </ListItemText>
-              </ListItem>
+              <TaskItem
+                isActive={task.id === selectedId}
+                key={task.id}
+                task={task}
+              />
             );
           })}
         </List>

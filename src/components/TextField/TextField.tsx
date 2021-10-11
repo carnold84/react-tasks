@@ -15,7 +15,7 @@ const TextField = ({ onChange, type = 'text', value, ...rest }: Props) => {
       onChange={onChange}
       type={'text'}
       value={value}
-      variant={type === 'textarea' ? 'h6' : 'h1'}
+      variant={type === 'textarea' ? 'h6' : 'h2'}
       {...rest}
     />
   );

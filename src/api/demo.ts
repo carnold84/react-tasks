@@ -76,6 +76,29 @@ const api = {
       }, 1000);
     });
   },
+  async deleteTask(taskId: string) {
+    return new Promise<CreateTaskResponse>(async (resolve, reject) => {
+      const state = await getState();
+      const task = state.tasks.filter(({ id }: Task) => {
+        return id === taskId;
+      });
+      const nextState = {
+        ...state,
+        tasks: state.tasks.filter(({ id }: Task) => {
+          return id !== taskId;
+        }),
+      };
+
+      await saveState(nextState);
+
+      setTimeout(() => {
+        resolve({
+          task,
+          error: undefined,
+        });
+      }, 1000);
+    });
+  },
   async fetchTasks() {
     return new Promise<TasksResponse>(async (resolve, reject) => {
       const state = await getState();

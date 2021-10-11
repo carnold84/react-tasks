@@ -1,8 +1,9 @@
 import { ChangeEvent, useState } from 'react';
-import { Progress, Typography } from 'react-library';
-import TextField from '../../containers/TextField';
+import { Progress } from 'react-library';
+import SaveState from '../../components/SaveState';
+import TextField from '../../components/TextField';
 import { Task as TaskType } from '../../types/store';
-import { Wrapper } from './Task.styles';
+import { ActionBar, Wrapper } from './Task.styles';
 
 type Props = {
   isSaving?: boolean;
@@ -28,8 +29,9 @@ const Task = ({ isSaving = false, task }: Props) => {
 
   return (
     <Wrapper>
-      {isSaving && <Progress />}
-      {!isSaving && 'Saved'}
+      <ActionBar>
+        <SaveState isSaving={isSaving} />
+      </ActionBar>
       <TextField mb={4} onChange={onTitleChange} value={values?.title ?? ''} />
       <TextField
         onChange={onNotesChange}

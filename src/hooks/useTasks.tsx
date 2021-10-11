@@ -23,8 +23,10 @@ const useTasks = () => {
   }, []);
 
   return {
-    data: state.tasks,
     isLoading,
+    tasks: state.tasks.allIds.map((id) => {
+      return state.tasks.byId[id];
+    }),
   };
 };
 

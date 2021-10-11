@@ -2,7 +2,13 @@ import { createContext, useReducer } from 'react';
 import reducer from './reducer';
 import { ProviderProps, Store } from '../types/store';
 
-const initialState = { tasks: [] };
+const initialState = {
+  tasks: {
+    allIds: [],
+    byId: {},
+    editing: [],
+  },
+};
 
 export const StoreContext = createContext<Store>({
   state: initialState,

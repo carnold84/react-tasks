@@ -11,7 +11,7 @@ type Params = { id: string };
 
 const Home = () => {
   const { id: selectedId }: Params = useParams();
-  const { data: tasks, isLoading } = useTasks();
+  const { isLoading, tasks } = useTasks();
   const { addTask, isSaving } = useAddTask();
   const history = useHistory();
 
@@ -64,13 +64,15 @@ const Home = () => {
   return (
     <Wrapper>
       <ContentLeft>
-        <Typography component={'h1'} mx={3} my={2} variant={'h2'}>
+        <Typography component={'h1'} mx={3} my={2} variant={'h5'}>
           Tasks
         </Typography>
         {leftContent}
-        <Button isPrimary={true} m={3} onClick={onNewTask}>
-          New Task
-        </Button>
+        {!isLoading && (
+          <Button isPrimary={true} m={3} onClick={onNewTask}>
+            New Task
+          </Button>
+        )}
       </ContentLeft>
       <ContentRight>{rightContent}</ContentRight>
     </Wrapper>

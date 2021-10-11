@@ -12,13 +12,28 @@ export type NewTask = {
   title: string;
 };
 
+export type EditingTask = {
+  isEditing: boolean;
+  task: Task;
+};
+
+export type TasksById = {
+  [key: string]: Task;
+};
+
 export type State = {
-  tasks: Array<Task>;
+  tasks: {
+    allIds: Array<string>;
+    byId: TasksById;
+    editing: Array<EditingTask>;
+  };
 };
 
 export type Action =
-  | { type: 'add-task'; payload: Task }
-  | { type: 'set-tasks'; payload: Array<Task> };
+  | { type: 'add-task'; payload: any }
+  | { type: 'delete-task'; payload: any }
+  | { type: 'edit-tasks'; payload: any }
+  | { type: 'set-tasks'; payload: Array<any> };
 
 export type ProviderProps = {
   children: ReactNode;

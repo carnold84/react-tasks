@@ -4,16 +4,12 @@ import api from '../api';
 import { NewTask, Task } from '../types/store';
 import useStore from './useStore';
 
-const useTasks = () => {
+const useAddTask = () => {
   const { dispatch } = useStore();
   const [isSaving, setIsSaving] = useState(false);
 
-  console.log('useTasks');
-
   const saveTask = async (task: Task) => {
     const { error } = await api.createTask(task);
-
-    console.log('saveTask');
 
     setIsSaving(false);
 
@@ -38,8 +34,6 @@ const useTasks = () => {
       type: 'add-task',
     });
 
-    console.log(task);
-
     saveTask(task);
 
     return task;
@@ -48,4 +42,4 @@ const useTasks = () => {
   return { addTask, isSaving };
 };
 
-export default useTasks;
+export default useAddTask;
