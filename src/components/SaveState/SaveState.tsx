@@ -12,7 +12,7 @@ const SaveState = ({ isSaving, ...rest }: Props) => {
       {isSaving && (
         <>
           <Progress size={'small'} />
-          <Typography mb={0} ml={2} style={{ color: 'inherit' }}>
+          <Typography mb={0} ml={1} style={{ color: 'inherit' }}>
             Saving
           </Typography>
         </>

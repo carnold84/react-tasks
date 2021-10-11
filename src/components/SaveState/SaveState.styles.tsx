@@ -6,4 +6,6 @@ export const Wrapper = styled.div`
   display: flex;
   fill: ${({ theme }) => theme.colors.text.color300};
   height: 28px;
+  justify-content: flex-end;
+  width: 70px;
 `;

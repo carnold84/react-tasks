@@ -11,7 +11,7 @@ type Props = {
   task: TaskType;
 };
 
-const DEBOUNCE_MS = 3000;
+const DEBOUNCE_MS = 1500;
 
 const Task = ({ isSaving = false, task }: Props) => {
   console.log(task);
@@ -64,7 +64,7 @@ const Task = ({ isSaving = false, task }: Props) => {
   return (
     <Wrapper>
       <ActionBar>
-        <IconButton mr={2} onClick={onDelete}>
+        <IconButton mr={3} onClick={onDelete}>
           <TrashFull height={20} width={20} />
         </IconButton>
         <SaveState isSaving={isSaving || isUpdating} />
