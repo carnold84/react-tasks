@@ -1,5 +1,5 @@
 import { List, LoadingScreen } from 'react-library';
-import { Task } from '../../types/store';
+import { Task } from '../../store/types';
 import { Wrapper } from './TasksList.styles';
 import TaskItem from '../TaskItem';
 

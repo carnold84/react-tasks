@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Checkbox, ListItem, ListItemText, TrashFull } from 'react-library';
-import { Task } from '../../types/store';
+import { Task } from '../../store/types';
 import useDeleteTask from '../../hooks/useDeleteTask';
 import { IconButton } from './TaskItem.styles';
 

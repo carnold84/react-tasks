@@ -1,6 +1,6 @@
 import { createContext, useReducer } from 'react';
 import reducer from './reducer';
-import { ProviderProps, Store } from '../types/store';
+import { ProviderProps, Store } from '../store/types';
 
 const initialState = {
   tasks: {

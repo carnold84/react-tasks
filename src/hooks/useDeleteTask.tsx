@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import api from '../api';
-import { Task } from '../types/store';
+import { Task } from '../store/types';
 import useStore from './useStore';
 
 const useDeleteTask = () => {

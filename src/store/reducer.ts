@@ -1,4 +1,4 @@
-import { Action, State, Task, TasksById } from '../types/store';
+import { Action, State, Task, TasksById } from '../store/types';
 
 const reducer = ({ tasks }: State, { payload, type }: Action) => {
   let byId: TasksById = {};
@@ -46,6 +46,17 @@ const reducer = ({ tasks }: State, { payload, type }: Action) => {
           ...tasks,
           allIds,
           byId,
+        },
+      };
+
+    case 'update-task':
+      return {
+        tasks: {
+          ...tasks,
+          byId: {
+            ...tasks.byId,
+            [payload.id]: payload,
+          },
         },
       };
 

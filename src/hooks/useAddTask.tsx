@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import api from '../api';
-import { NewTask, Task } from '../types/store';
+import { NewTask, Task } from '../store/types';
 import useStore from './useStore';
 
 const useAddTask = () => {
@@ -26,7 +26,6 @@ const useAddTask = () => {
       done: false,
       id: uuidv4(),
       notes: '',
-      subTasks: [],
     };
 
     dispatch({

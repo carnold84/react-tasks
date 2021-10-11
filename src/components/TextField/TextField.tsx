@@ -1,7 +1,8 @@
+import { ChangeEvent } from 'react';
 import { Wrapper } from './TextField.styles';
 
 type Props = {
-  onChange(event: React.ChangeEvent<HTMLInputElement>): void;
+  onChange(event: ChangeEvent<HTMLInputElement>): void;
   type?: 'text' | 'textarea';
   value: string;
   [x: string]: any;

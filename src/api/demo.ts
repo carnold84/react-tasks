@@ -1,4 +1,4 @@
-import { Task } from '../types/store';
+import { Task, UpdatedTask } from '../store/types';
 
 type TasksResponse = {
   tasks: Array<Task>;
@@ -28,20 +28,6 @@ const getState = async () => {
             id: '2',
             notes:
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In nec ornare urna. Phasellus viverra pulvinar tortor. Fusce ornare euismod augue in scelerisque. Curabitur dolor augue, feugiat ac pellentesque id, venenatis non dui. Duis aliquet quis neque ut vehicula. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.',
-            subTasks: [
-              {
-                id: 'sub-1',
-                title: 'Sub Task 1',
-              },
-              {
-                id: 'sub-2',
-                title: 'Sub Task 2',
-              },
-              {
-                id: 'sub-3',
-                title: 'Sub Task 3',
-              },
-            ],
             title: 'Task 2',
           },
           {
@@ -105,6 +91,38 @@ const api = {
       setTimeout(() => {
         resolve({
           tasks: state?.tasks,
+        });
+      }, 1000);
+    });
+  },
+  async updateTask(updatedTask: UpdatedTask) {
+    return new Promise<CreateTaskResponse>(async (resolve, reject) => {
+      const state = await getState();
+      let nextTask: Task;
+
+      console.log(state, updatedTask);
+
+      const nextState = {
+        ...state,
+        tasks: state.tasks.map((task: Task) => {
+          if (task.id === updatedTask.id) {
+            nextTask = {
+              ...task,
+              ...updatedTask,
+            };
+            return nextTask;
+          }
+
+          return task;
+        }),
+      };
+
+      await saveState(nextState);
+
+      setTimeout(() => {
+        resolve({
+          task: nextTask,
+          error: undefined,
         });
       }, 1000);
     });

@@ -44,18 +44,13 @@ const Home = () => {
       rightContent = <button onClick={onNewTask}>Add a task</button>;
     } else {
       if (selectedId) {
-        if (selectedId === 'new') {
-          console.log('new');
-          rightContent = <Task isSaving={isSaving} />;
+        const task = tasks?.filter(({ id }) => {
+          return id === selectedId;
+        })[0];
+        if (task) {
+          rightContent = <Task isSaving={isSaving} task={task} />;
         } else {
-          const task = tasks?.filter(({ id }) => {
-            return id === selectedId;
-          })[0];
-          if (task) {
-            rightContent = <Task isSaving={isSaving} task={task} />;
-          } else {
-            rightContent = <p>Couldn't find the task!</p>;
-          }
+          rightContent = <p>Couldn't find the task!</p>;
         }
       }
     }

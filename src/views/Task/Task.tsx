@@ -1,36 +1,52 @@
 import { ChangeEvent, useState } from 'react';
-import { Progress } from 'react-library';
 import SaveState from '../../components/SaveState';
 import TextField from '../../components/TextField';
-import { Task as TaskType } from '../../types/store';
+import useUpdateTask from '../../hooks/useUpdateTask';
+import { Task as TaskType } from '../../store/types';
 import { ActionBar, Wrapper } from './Task.styles';
 
 type Props = {
   isSaving?: boolean;
-  task?: TaskType;
+  task: TaskType;
 };
 
-const Task = ({ isSaving = false, task }: Props) => {
-  const [values, setValues] = useState({ ...task });
+const DEBOUNCE_MS = 3000;
 
-  const onTitleChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setValues({
+const Task = ({ isSaving = false, task }: Props) => {
+  const [values, setValues] = useState<TaskType>({ ...task });
+  const [timeoutId, setTimeoutId] = useState<number>();
+  const { isUpdating, updateTask } = useUpdateTask();
+
+  const updateValue = (key: string, value: string) => {
+    const nextValues = {
       ...values,
-      title: evt.target.value,
-    });
+      [key]: value,
+    };
+
+    setValues(nextValues);
+
+    clearTimeout(timeoutId);
+
+    const nextTimeoutId: number = window.setTimeout(() => {
+      console.log('SAVE!');
+      updateTask(nextValues);
+    }, DEBOUNCE_MS);
+
+    setTimeoutId(nextTimeoutId);
   };
 
   const onNotesChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    setValues({
-      ...values,
-      notes: evt.target.value,
-    });
+    updateValue('notes', evt.currentTarget.value);
+  };
+
+  const onTitleChange = (evt: ChangeEvent<HTMLInputElement>) => {
+    updateValue('title', evt.currentTarget.value);
   };
 
   return (
     <Wrapper>
       <ActionBar>
-        <SaveState isSaving={isSaving} />
+        <SaveState isSaving={isSaving || isUpdating} />
       </ActionBar>
       <TextField mb={4} onChange={onTitleChange} value={values?.title ?? ''} />
       <TextField
@@ -38,14 +54,6 @@ const Task = ({ isSaving = false, task }: Props) => {
         type={'textarea'}
         value={values?.notes ?? ''}
       />
-
-      {task?.subTasks && (
-        <ul>
-          {task.subTasks.map(({ id, title }) => {
-            return <li key={id}>{title}</li>;
-          })}
-        </ul>
-      )}
     </Wrapper>
   );
 };
