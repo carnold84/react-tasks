@@ -10,8 +10,6 @@ const useDeleteTask = () => {
   const removeTask = async (task: Task) => {
     const { error } = await api.deleteTask(task.id);
 
-    setIsDeleting(false);
-
     if (error) {
       console.error("Couldn't save");
     }

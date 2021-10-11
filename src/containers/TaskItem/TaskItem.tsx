@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom';
-import { Checkbox, ListItem, ListItemText, TrashFull } from 'react-library';
+import { Checkbox, ListItem, ListItemText } from 'react-library';
 import { Task } from '../../store/types';
-import useDeleteTask from '../../hooks/useDeleteTask';
-import { IconButton } from './TaskItem.styles';
 
 type Props = {
   isActive?: boolean;
@@ -10,15 +8,8 @@ type Props = {
 };
 
 const TaskItem = ({ isActive = false, task }: Props) => {
-  const { deleteTask } = useDeleteTask();
-
   const onCheck = () => {
     console.log(task.id, task.done);
-  };
-
-  const onDelete = () => {
-    console.log(task.id, task.done);
-    deleteTask(task);
   };
 
   return (
@@ -30,11 +21,6 @@ const TaskItem = ({ isActive = false, task }: Props) => {
           onChange={onCheck}
           value={task.done}
         />
-      }
-      contentRight={
-        <IconButton onClick={onDelete}>
-          <TrashFull height={20} width={20} />
-        </IconButton>
       }
       isActive={isActive}
       key={task.id}>

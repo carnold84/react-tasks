@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
 import { Button, LoadingScreen, Typography } from 'react-library';
 import TasksList from '../../containers/TasksList';
-import useAddTask from '../../hooks/useAddTask';
-import useTasks from '../../hooks/useTasks';
+import { useAddTask, useTasks } from '../../hooks';
 import Task from '../Task';
 import { ContentLeft, ContentRight, Wrapper } from './Home.styles';
 
@@ -47,6 +46,7 @@ const Home = () => {
         const task = tasks?.filter(({ id }) => {
           return id === selectedId;
         })[0];
+        console.log(task);
         if (task) {
           rightContent = <Task isSaving={isSaving} task={task} />;
         } else {
