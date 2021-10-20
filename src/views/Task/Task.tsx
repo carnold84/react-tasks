@@ -1,10 +1,11 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { TrashFull } from 'react-library';
+import { ChangeEvent, useEffect, useMemo, useState } from 'react';
+import { Editor, Trash } from 'versify-react';
 import { useHistory } from 'react-router';
 import { SaveState, TextField } from '../../components';
 import { useDeleteTask, useUpdateTask } from '../../hooks';
 import { Task as TaskType } from '../../store/types';
-import { ActionBar, Content, IconButton, Wrapper } from './Task.styles';
+import { Content, IconButton, Wrapper } from './Task.styles';
+import ActionBar from '../../components/ActionBar';
 
 type Props = {
   isSaving?: boolean;
@@ -14,9 +15,11 @@ type Props = {
 const DEBOUNCE_MS = 1500;
 
 const Task = ({ isSaving = false, task }: Props) => {
-  console.log(task);
   const history = useHistory();
   const [values, setValues] = useState<TaskType>({ ...task });
+  const initialNotes = useMemo(() => {
+    return { html: task.notes ?? '' };
+  }, []);
   const [timeoutId, setTimeoutId] = useState<number>();
   const { deleteTask } = useDeleteTask();
   const { isUpdating, updateTask } = useUpdateTask();
@@ -42,8 +45,8 @@ const Task = ({ isSaving = false, task }: Props) => {
     setTimeoutId(nextTimeoutId);
   };
 
-  const onNotesChange = (evt: ChangeEvent<HTMLInputElement>) => {
-    updateValue('notes', evt.currentTarget.value);
+  const onNotesChange = (content: string) => {
+    updateValue('notes', content);
   };
 
   const onTitleChange = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -63,9 +66,9 @@ const Task = ({ isSaving = false, task }: Props) => {
 
   return (
     <Wrapper>
-      <ActionBar>
+      <ActionBar style={{ justifyContent: 'flex-end' }}>
         <IconButton mr={3} onClick={onDelete}>
-          <TrashFull height={20} width={20} />
+          <Trash height={20} width={20} />
         </IconButton>
         <SaveState isSaving={isSaving || isUpdating} />
       </ActionBar>
@@ -75,11 +78,7 @@ const Task = ({ isSaving = false, task }: Props) => {
           onChange={onTitleChange}
           value={values?.title ?? ''}
         />
-        <TextField
-          onChange={onNotesChange}
-          type={'textarea'}
-          value={values?.notes ?? ''}
-        />
+        <Editor content={initialNotes} onUpdate={onNotesChange} />
       </Content>
     </Wrapper>
   );

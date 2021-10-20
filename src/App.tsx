@@ -1,4 +1,4 @@
-import { App as AppContainer, darkTheme, defaultTheme } from 'react-library';
+import { App as AppContainer, darkTheme, defaultTheme } from 'versify-react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import StoreProvider from './store';
 import Home from './views/Home';

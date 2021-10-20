@@ -1,5 +1,5 @@
 import { Wrapper } from './SaveState.styles';
-import { CloudCheck, Progress, Typography } from 'react-library';
+import { CloudCheck, Progress, Typography } from 'versify-react';
 
 type Props = {
   isSaving: boolean;

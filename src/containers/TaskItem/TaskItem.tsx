@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Checkbox, ListItem, ListItemText } from 'react-library';
+import { Checkbox, ListItem, ListItemText } from 'versify-react';
 import { Task } from '../../store/types';
 
 type Props = {

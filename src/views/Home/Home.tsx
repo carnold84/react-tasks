@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { Button, LoadingScreen, Typography } from 'react-library';
+import { IconButton, LoadingScreen, Plus, Typography } from 'versify-react';
+import ActionBar from '../../components/ActionBar';
 import TasksList from '../../containers/TasksList';
 import { useAddTask, useTasks } from '../../hooks';
 import Task from '../Task';
@@ -46,9 +47,8 @@ const Home = () => {
         const task = tasks?.filter(({ id }) => {
           return id === selectedId;
         })[0];
-        console.log(task);
         if (task) {
-          rightContent = <Task isSaving={isSaving} task={task} />;
+          rightContent = <Task isSaving={isSaving} key={task.id} task={task} />;
         } else {
           rightContent = <p>Couldn't find the task!</p>;
         }
@@ -59,15 +59,17 @@ const Home = () => {
   return (
     <Wrapper>
       <ContentLeft>
-        <Typography component={'h1'} mx={3} my={2} variant={'h5'}>
-          Tasks
-        </Typography>
+        <ActionBar>
+          <Typography component={'h1'} my={2} variant={'h5'}>
+            Tasks
+          </Typography>
+          {!isLoading && (
+            <IconButton onClick={onNewTask}>
+              <Plus />
+            </IconButton>
+          )}
+        </ActionBar>
         {leftContent}
-        {!isLoading && (
-          <Button isPrimary={true} m={3} onClick={onNewTask}>
-            New Task
-          </Button>
-        )}
       </ContentLeft>
       <ContentRight>{rightContent}</ContentRight>
     </Wrapper>

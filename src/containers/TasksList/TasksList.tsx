@@ -1,4 +1,4 @@
-import { List, LoadingScreen } from 'react-library';
+import { List, LoadingScreen, Typography } from 'versify-react';
 import { Task } from '../../store/types';
 import { Wrapper } from './TasksList.styles';
 import TaskItem from '../TaskItem';
@@ -25,7 +25,11 @@ const TasksList = ({ isLoading = false, selectedId, tasks = [] }: Props) => {
     content = <LoadingScreen />;
   } else {
     if (tasks.length === 0) {
-      content = <p>No tasks</p>;
+      content = (
+        <Typography style={{ textAlign: 'center' }} variant={'h6'} width={1}>
+          No tasks
+        </Typography>
+      );
     } else {
       const sortedTasks = [...tasks];
       sortedTasks.sort((x, y) => {

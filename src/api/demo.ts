@@ -100,8 +100,6 @@ const api = {
       const state = await getState();
       let nextTask: Task;
 
-      console.log(state, updatedTask);
-
       const nextState = {
         ...state,
         tasks: state.tasks.map((task: Task) => {
